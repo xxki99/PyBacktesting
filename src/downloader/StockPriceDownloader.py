@@ -14,6 +14,15 @@ class PriceDownloader():
         self.data = pd.DataFrame()
         
         self.do_download()
+        self.data_process()
+
+    def data_process(self):
+        self.data["Date"] = self.data.index
+
+
+    def get_data(self):
+        
+        return self.data
 
 
     def do_download(self):
