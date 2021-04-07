@@ -16,6 +16,8 @@ class Trader():
         self.record = pd.DataFrame()
 
     def do_dailyOperation(self, info):
+        if np.isnan(info[self.col_isBuy]):
+            return
         if info[self.col_isBuy]:
             self.do_buy(info)
         else:
@@ -52,6 +54,14 @@ class Trader():
             pass
 
     def do_buy(self, info):
+        if self.record.empty:
+            date_start = self.buyDate
+            date_end = info[self.col_date]
+            buyPrice = self.buyPrice
+            sellPrice = info[self.col_price]
+            endProfit = self.profit
+            self.save_record(date_start, date_end, buyPrice, sellPrice, 0, endProfit)
+
         if self.holding:
             pass
         else:
